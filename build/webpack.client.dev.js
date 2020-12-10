@@ -11,6 +11,8 @@ const {
   CONSTANTS,
 } = require('./webpack.common.js');
 
+const webpack = require('webpack');
+
 const {
   devEnvToUseTls,
   devEnvValues,
@@ -39,6 +41,7 @@ const publicPath = `http${devEnvToUseTls ? 's' : ''}://${
 
 const devSpecificConfig = {
   mode: DEVELOPMENT,
+  devtool: 'eval-source-map',
   module: {
     rules: [
       withStylingModuleLoader(['style-loader']),
@@ -62,6 +65,9 @@ const devSpecificConfig = {
       reportFilename: `${BUNDLE_ANALYSER_DIR}/bundles.html`, // when in dev mode, produce a static html file
     }),
     withModuleFederationPlugin,
+    new webpack.DefinePlugin({
+      __PUBLIC_PATH__: JSON.stringify(publicPath),
+    }),
   ],
   resolve: {
     plugins: [withTsconfigPathsPlugin({ configFile: 'client/tsconfig.json' })],
