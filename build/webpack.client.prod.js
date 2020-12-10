@@ -30,6 +30,7 @@ const {
   withMiniCssExtractPlugin,
   withWebpackBundleAnalyzerPlugin,
   withTsconfigPathsPlugin,
+  withApiBasePath
 } = plugins;
 
 const { PRODUCTION, CLIENT_BUILD_DIR, BUNDLE_ANALYSER_DIR } = CONSTANTS;
@@ -108,6 +109,7 @@ const prodSpecificConfig = {
     withWebpackBundleAnalyzerPlugin({
       reportFilename: `${BUNDLE_ANALYSER_DIR}/client-report.json`,
     }),
+    withApiBasePath(process.env.BASE_PATH || ''),
   ],
   resolve: {
     plugins: [withTsconfigPathsPlugin({ configFile: 'client/tsconfig.json' })],

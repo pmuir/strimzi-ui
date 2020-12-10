@@ -15,7 +15,10 @@ const {
 } = require('./webpack.common.js');
 const { HEADER_TEXT } = require('../utils/tooling/constants.js');
 const { withTypeScriptModuleLoader } = moduleLoaders;
-const { withWebpackBundleAnalyzerPlugin, withTsconfigPathsPlugin } = plugins;
+const {
+  withWebpackBundleAnalyzerPlugin,
+  withTsconfigPathsPlugin
+} = plugins;
 
 const {
   PRODUCTION,
@@ -59,7 +62,7 @@ const prodSpecificConfig = {
     // include default bundle analysis
     withWebpackBundleAnalyzerPlugin({
       reportFilename: `${BUNDLE_ANALYSER_DIR}/server-report.json`,
-    }),
+    })
   ],
   resolve: {
     plugins: [withTsconfigPathsPlugin({ configFile: 'server/tsconfig.json' })],
