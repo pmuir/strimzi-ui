@@ -49,7 +49,6 @@ export type MutationDeleteTopicsArgs = {
 export type Topic = {
   /** ID */
   name?: Maybe<Scalars['String']>;
-  isInternal?: Maybe<Scalars['Boolean']>;
   partitions: Array<Partition>;
   config?: Maybe<Array<Maybe<ConfigEntry>>>;
 };
@@ -89,11 +88,13 @@ export enum SortDirectionEnum {
 }
 
 export type TopicList = {
-  items: Array<Maybe<Topic>>;
+  topics: Array<Maybe<Topic>>;
   offset?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   count?: Maybe<Scalars['Int']>;
 };
+
+export type TopicListResponse = { data: TopicList };
 
 export type NewTopicConfigEntry = {
   key?: Maybe<Scalars['String']>;
